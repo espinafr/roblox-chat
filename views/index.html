@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+    <form method="POST" action="">
+        <div>
+            <label for="nome">Nome:</label> 
+            <input type="text" name="nome" required>
+        </div>
+        <div>
+            <label for="mensagem">Mensagem:</label>
+            <input type="text" name="mensagem" required>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+    {% if retorno %}
+    <p class="{{ classe }}" id="retorno">{{ retorno }}</p>
+    {% endif %}
+</body>
+{% endblock %}
