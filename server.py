@@ -23,7 +23,7 @@ def access_db(command: str, params, method: str):
 def index():
     if request.method == 'POST':
         try:
-            access_db('UPDATE mensagem SET usuario=(?), mensagem=(?)', (request.form["nome"], request.form["mensagem"]), 'c')
+            access_db('UPDATE mensagem SET usuario=(?), mensagem=(?)', (request.form["nome"], request.form["mensagem"],), 'c')
             return render_template('index.html', classe='sucesso', retorno='funcionou')
         except Exception as e:
             return render_template('index.html', classe='erro', retorno=e)
@@ -47,4 +47,5 @@ if __name__ == '__main__':
             mensagem TEXT
         )
     ''', (), 'c')
+    access_db('INSERT INTO mensagem(usuario, mensagem) SELECT ?, ? WHERE NOT EXISTS(SELECT 1 FROM mensagem)', ('Usuario','Mensagem teste!',), 'c')
     app.run(debug=True)
